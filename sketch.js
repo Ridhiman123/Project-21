@@ -13,55 +13,29 @@ function setup() {
 
 function draw() {
   background(255,255,255); 
-  if(wall.x-bullet.x < (bullet.width + wall.width)/2)
-   {
-    bullet.velocityX = 0;
-     var deformation = 0.5 * weight * speed * speed/22509
-     if(deformation>180)
-     {
-      bullet.shapeColor = color(255,0,0);
-     } 
-       if(deformation<180 && deformation>100)
-      {
-        bullet.shapeColor = color(0,225,0);
-      } 
-   }
-        wall.shapeColor = color(80,80,80)
-  
-  drawSprites();
-}
-function bounceOff(bullet,wall){
-if (bullet.x - wall.x < wall.width/2 + bullet.width/2
-  && wall.x - bullet.x <wall.width/2 + bullet.width/2) {
-    bullet.velocityX = bullet.velocityX * (-1);
-    wall.velocityX = wall.velocityX * (-1);
-}
-if (bullet.y - wall.y < wall.height/2 + bullet.height/2
-&& wall.y -bullet.y < wall.height/2 + bullet.height/2){
-  bullet.velocityY = bullet.velocityY * (-1);
-  wall.velocityY = wall.velocityY * (-1);
-}
-}
-function hasCollided(bullet,wall)
-{
-  bulletRightEdge = bullet.x + bullet.widht;
-  wallLeftEdge = wall.x;
-  if(bulletRightEdge>=wallLeftEdge)
-  {
-    return true
-  }
-  return false
-}
-if(hasCollided(bullet,wall))
+  if(hasCollided(bullet,wall))
 {
   bullet.velocityX = 0
   var damage = 0.5 * weight * speed * speed/(thickness * thickness * thickness);
   
   if(damage<10)
      wall.shapeColor = color(0,225,0)
+}
+if (damage>10){
+  wall.shapeColor = color(255,0,0)
+}
+drawSprites();
+}
 
-
-
+function hasCollided(bullet1,wall1)
+{
+  bulletRightEdge = bullet1.x + bullet1.width;
+  wallLeftEdge = wall1.x;
+  if(bulletRightEdge>=wallLeftEdge)
+  {
+    return true
+  }
+  return false
 }
 
 
